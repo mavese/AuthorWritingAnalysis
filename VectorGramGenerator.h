@@ -4,6 +4,7 @@
 #ifndef VECTORGRAMGENERATOR_H_
 #define VECTORGRAMGENERATOR_H_
 
+#include "IGramGenerator.h"
 #include <vector>
 #include <string>
 #include <tuple>
@@ -11,20 +12,19 @@
 
 using namespace std;
 
-class VectorGramGenerator {
+class VectorGramGenerator : public IGramGenerator
+{
 private:
 	vector<tuple<string, int>> unigram;
 	vector<tuple<string, string, int>> bigram;
-	void addWord(string);
-	void addTwoWords(string, string);
-	float computeProbability(string, string);
-
 public:
-	// VectorGramGenerator();
-	// virtual ~VectorGramGenerator();
-	void addUnigram(string);
-	void addBigram(string, string);
-	void printGrams();
+	VectorGramGenerator();
+	virtual ~VectorGramGenerator();
+	void addWord(string) override;
+	void addTwoWords(string, string) override;
+	float computeProbability(string, string) override;
+	void printGrams() override;
 };
 
+#include "VectorGramGenerator.cpp"
 #endif /* VECTORGRAMGENERATOR_H_ */

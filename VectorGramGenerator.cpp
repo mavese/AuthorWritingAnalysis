@@ -6,17 +6,17 @@
 
 using namespace std;
 
-// VectorGramGenerator::VectorGramGenerator()
-// {
-// }
+VectorGramGenerator::VectorGramGenerator()
+{
+}
 
-// VectorGramGenerator::~VectorGramGenerator()
-// {
-// 	unigram.clear();
-// 	vector<tuple<string, int>>().swap(unigram);
-// 	bigram.clear();
-// 	vector<tuple<string, int>>().swap(bigram);
-// }
+VectorGramGenerator::~VectorGramGenerator()
+{
+	// unigram.clear();
+	// vector<tuple<string, int>>().swap(unigram);
+	// bigram.clear();
+	// vector<tuple<string, int>>().swap(bigram);
+}
 void VectorGramGenerator::addWord(string word)
 {
 	bool isFound = false;
@@ -55,7 +55,6 @@ float VectorGramGenerator::computeProbability(string biWord1, string biWord2)
 {
 	float nTimesBi = 0;
 	float nTimesUn = 0;
-	bool isFound = false;
 	for (int i = 0; i < bigram.size(); i++)
 	{
 		if (get<0>(bigram[i]) == biWord1 && get<1>(bigram[i]) == biWord2)
@@ -64,7 +63,6 @@ float VectorGramGenerator::computeProbability(string biWord1, string biWord2)
 			break;
 		}
 	}
-	isFound = false;
 	for (int i = 0; i < unigram.size(); i++)
 	{
 		if (get<0>(unigram[i]) == biWord1)
@@ -78,16 +76,6 @@ float VectorGramGenerator::computeProbability(string biWord1, string biWord2)
 		return nTimesBi / nTimesUn;
 	}
 	return 0;
-}
-
-void VectorGramGenerator::addUnigram(string word)
-{
-	addWord(word);
-}
-
-void VectorGramGenerator::addBigram(string biWord1, string biWord2)
-{
-	addTwoWords(biWord1, biWord2);
 }
 
 void VectorGramGenerator::printGrams()
